@@ -10,7 +10,7 @@
           <label class="control-label">Workout comments:</label>
           <input class="form-control" :value="workout.comment" @input="updateDetails" name="comment" type="text">
 
-        <div v-for="(exercise, exIndex) in workout.exercises">
+        <div v-for="(exercise, exIndex) in workout.entries">
         <h4>{{exercise.name}}</h4>
         <table class="table table-bordered">
           <tbody>

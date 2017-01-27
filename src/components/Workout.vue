@@ -33,9 +33,9 @@
             </template>
         </thead>
           <tbody>
-          <tr v-for="exercise in workout.exercises">
-                <td>{{exercise.name}}</td>
-                <template v-for="set in exercise.sets">
+          <tr v-for="entry in workout.entries">
+                <td>{{entry.exercise.name}}</td>
+                <template v-for="set in entry.sets">
                     <td>
                     {{set.reps}}</td>
                     <td>{{set.weight}}</td>
@@ -43,7 +43,7 @@
             </tr>
           </tbody>
           </table>
-          <comments :comment="workout.comment" :exercises="workout.exercises"></comments>
+          <comments :comment="workout.comment" :entries="workout.entries"></comments>
             </div>
         </div>
     </div>
