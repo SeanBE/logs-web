@@ -28,28 +28,6 @@
     <div class="col-md-4">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title text-center">Total Workout Volume</h3>
-        </div>
-        <div class="panel-body">
-          <form>
-            <div class="form-group">
-              <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Weekly
-                          </label>
-              <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Monthly
-                          </label>
-              <label class="radio-inline">
-                              <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> Yearly
-                          </label>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
           <h3 class="panel-title text-center">Latest PRs</h3>
         </div>
         <div class="panel-body">
@@ -107,35 +85,6 @@
               <tbody>
           </table>
 
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title text-center">Next Workout</h3>
-        </div>
-        <div class="panel-body">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title text-center">Top 3 Stats</h3>
-        </div>
-        <div class="panel-body">
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h3 class="panel-title text-center">Body Weight</h3>
-        </div>
-        <div class="panel-body">
         </div>
       </div>
     </div>
