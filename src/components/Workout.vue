@@ -19,43 +19,19 @@
   </div>
   <div :id="collapse" class="panel-collapse collapse in" role="tabpanel" :aria-labelledby="header">
     <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-          <template v-for="n in 5">
-            <th colspan="2" style="text-align:right;">Set #{{n}}</th>
-          </template>
-        </thead>
-        <thead>
-          <th> Exercise </th>
-            <template v-for="n in 5">
-              <th> Reps</th>
-              <th> Weight </th>
-            </template>
-        </thead>
-          <tbody>
-          <tr v-for="entry in workout.entries">
-                <td>{{entry.exercise.name}}</td>
-                <template v-for="set in entry.sets">
-                    <td>
-                    {{set.reps}}</td>
-                    <td>{{set.weight}}</td>
-                  </template>
-            </tr>
-          </tbody>
-          </table>
-          <comments :comment="workout.comment" :entries="workout.entries"></comments>
-            </div>
-        </div>
+      <Sets :comment="workout.comment" :entries="workout.entries" />
     </div>
+</div>
+</div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
-import Comments from './Comments.vue'
+import Sets from './Sets.vue'
 
 export default {
   components: {
-    Comments
+    Sets
   },
   methods: {
     ...mapActions({deleteExercise: 'DELETE_WORKOUT'}),

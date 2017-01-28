@@ -24,10 +24,10 @@
 
       <h4>Recently Used</h4>
       <ul class="list-group well">
-        <a href="#" v-for="exercise in recentlyUsed" class="list-group-item">
+        <li v-for="exercise in recentlyUsed" class="list-group-item">
           <h4 class="list-group-item-heading">{{exercise.name}}</h4>
           <p class="list-group-item-text">{{exercise.comment}}</p>
-        </a>
+        </li>
       </ul>
 
     </div>
