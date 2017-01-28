@@ -1,23 +1,24 @@
 <template>
 <div class="panel panel-default">
-  <div class="panel-heading" role="tab" :id="header">
+  <div class="panel-heading" role="tab" v-bind:id="'header'+this.workout.id">
       <h4 class="panel-title">
 
-      <a role="button" data-toggle="collapse" data-parent="#accordion" :href="collapseHash" aria-expanded="true" :aria-controls="collapse">
+      <a role="button" data-toggle="collapse" data-parent="#accordion" v-bind:href="'#collapse'+this.workout.id">
         Workout {{workout.date_proposed}}
       </a>
 
       <div class="pull-right">
-      <button type="button" @click.prevent="deleteExercise(workout)" class="btn btn-danger btn-xs" aria-label="Delete">
-        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+      <button type="button" @click.prevent="deleteExercise(workout)" class="btn btn-danger btn-xs">
+        <span class="glyphicon glyphicon-trash"></span>
       </button>
-      <button @click="goToEdit(workout)" type="button" class="btn btn-info btn-xs" aria-label="Edit">
-        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      <button @click="goToEdit(workout)" type="button" class="btn btn-info btn-xs">
+        <span class="glyphicon glyphicon-pencil"></span>
       </button>
       </div>
+      
     </h4>
   </div>
-  <div :id="collapse" class="panel-collapse collapse in" role="tabpanel" :aria-labelledby="header">
+  <div v-bind:id="'collapse'+ this.workout.id" class="panel-collapse collapse in" role="tabpanel">
     <div class="panel-body">
       <Sets :comment="workout.comment" :entries="workout.entries" />
     </div>
@@ -40,19 +41,7 @@ export default {
       this.$router.push({name: 'workout.edit', params: { id: workout.id }})
     }
   },
-  props: ['workout'],
-  computed: {
-    // TODO change this to v-bind:... get rid of dis shit.
-    header: function () {
-      return `header${this.workout.id}`
-    },
-    collapse: function () {
-      return `collapse${this.workout.id}`
-    },
-    collapseHash: function () {
-      return `#collapse${this.workout.id}`
-    }
-  }
+  props: ['workout']
 }
 </script>
 <style></style>
