@@ -5,7 +5,7 @@
     <div class="col-md-12">
       <h1>Edit Workout
         <button type="button" @click.prevent="updateWorkout" class="btn btn-primary">Update</button>
-        <button type="button" disabled="true" class="btn">Add Exercise</button>
+        <button type="button" disabled class="btn">Add Exercise</button>
         <!-- @click.prevent="addExercise({workout:workout, exercise:exercise})"  -->
       </h1>
       <form>
@@ -23,43 +23,43 @@
         </div>
       </div>
 </div>
-<div v-for="(entry,index) in workout.entries" class="row">
+<div v-for="(entry,exIndex) in workout.entries" class="row">
   <div class="col-md-12">
     <div class="form-group">
-      <label v-bind:for="entry.exercise.name" class="control-label">Exercise:</label>
-      <select v-bind:id="entry.exercise.name" :value="entry.exercise.name" @input="updateDetails" name="exercise_name" class="form-control">
+      <label class="control-label">Exercise:</label>
+
+      <select :value="entry.exercise.name" @change="updateExercise(exIndex, $event.target.value)" class="form-control">
           <option v-for="exercise in exercises">{{exercise.name}}</option>
       </select>
     </div>
     <div class="form-group">
       <!-- @click.prevent="addSet({workout:workout, exercise:exercise})"  -->
-      <button type="button" disabled="true" class="btn">Add Set</button>
+      <button type="button" disabled class="btn">Add Set</button>
     </div>
-    <div v-for="(set,index) in entry.sets" class="well form-group">
+    <div v-for="(set,sIndex) in entry.sets" class="well form-group">
 
       <div class="form-group">
       <label class="control-label">Reps:</label>
       <input type="number" :value="set.reps"
-          @input="updateSets(exIndex, setIndex, 'reps', $event)" class="form-control" />
+          @input="updateSets(exIndex, sIndex, 'reps', $event)" class="form-control" />
       </div>
 
       <label class="control-label">Weight:</label>
-      <input type="number" :value="set.weight"
-          @input="updateSets(exIndex, setIndex, 'weight', $event)" class="form-control" />
+      <input :disabled="set.bodyweight" type="number" :value.number="set.weight"
+          @input="updateSets(exIndex, sIndex, 'weight', $event)" class="form-control" />
 
       <div class="checkbox">
         <label>
-          <input type="checkbox"> Bodyweight
+          <input type="checkbox" @change="updateCheck(exIndex, sIndex, 'bodyweight', $event)" :checked="set.bodyweight">
+          Bodyweight
         </label>
       </div>
 
       <label class="control-label">Comment:</label>
-      <input type="text" :value="set.comment"
-          @input="updateSets(exIndex, setIndex, 'comment', $event)" class="form-control" />
-
+      <textarea class="form-control" :value="set.comment"
+          @input="updateSets(exIndex, sIndex, 'comment', $event)" type="text">
 
     </div>
-
 </div>
 </div>
 </div>
@@ -75,12 +75,25 @@ export default {
     updateDetails: function (e) {
       this.$store.dispatch('CHANGE_WORKOUT_DETAILS', {attr: e.target.name, value: e.target.value})
     },
+    updateExercise: function (exIndex, value) {
+      this.$store.dispatch('CHANGE_EXERCISE', {
+        index: exIndex,
+        exercise: this.exercises.find(obj => obj.name === value)})
+    },
     updateSets: function (exIndex, setIndex, attribute, e) {
       this.$store.dispatch('CHANGE_EXERCISES', {
         exercise: exIndex,
         set: setIndex,
         attr: attribute,
         value: e.target.value})
+    },
+    updateCheck: function (exIndex, setIndex, attribute, e) {
+      // TODO DRY MUCH??
+      this.$store.dispatch('CHANGE_EXERCISES', {
+        exercise: exIndex,
+        set: setIndex,
+        attr: attribute,
+        value: e.target.checked})
     },
     updateWorkout () {
       // TODO Validation.

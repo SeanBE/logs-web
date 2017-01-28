@@ -13,7 +13,7 @@
         </router-link>
       </div>
 
-      <div class="collapse navbar-collapse" id="navbar">
+      <div class="navbar-collapse collapse" id="navbar">
         <ul v-show="isLogged" class="nav navbar-nav navbar-right">
           <li>
             <router-link :to="{ name: 'workouts' }"><a class="navbar-link">Workouts</a></router-link>

@@ -2,7 +2,7 @@
 <div>
   <div v-if="comment" class="row">
     <div class="col-xs-offset-1 col-xs-10">
-      <p class="lead">
+      <p class="lead well">
         {{comment}}
       </p>
     </div>

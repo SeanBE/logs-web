@@ -43,6 +43,10 @@ const actions = {
   CHANGE_WORKOUT_DETAILS: ({ commit }, payload) => {
     commit(types.CHANGE_WORKOUT_DETAILS, payload)
   },
+  CHANGE_EXERCISE: ({ commit }, payload) => {
+    console.log(payload)
+    commit(types.CHANGE_EXERCISE, payload)
+  },
   CHANGE_EXERCISES: ({ commit }, payload) => {
     commit(types.CHANGE_EXERCISES, payload)
   },
@@ -72,7 +76,11 @@ const mutations = {
     state.workout[attr] = value
   },
   [types.CHANGE_EXERCISES] (state, {exercise, set, attr, value}) {
-    state.workout.exercises[exercise]['sets'][set][attr] = value
+    // TODO rename.
+    state.workout.entries[exercise].sets[set][attr] = value
+  },
+  [types.CHANGE_EXERCISE] (state, {index, exercise}) {
+    state.workout.entries[index].exercise = exercise
   },
   [types.ADD_SET_TO_WORKOUT] (state, {workout, exercise}) {
     state.workouts[state.workouts.indexOf(workout)].exercises[exercise]
