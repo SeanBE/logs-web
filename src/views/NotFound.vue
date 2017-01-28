@@ -6,7 +6,6 @@
           <a class="btn btn-primary btn-lg">
             <span class="glyphicon glyphicon-home"></span>
             Take Me Home </a>
-            <!-- TODO return to previous link? -->
         </router-link>
       </div>
 </div>

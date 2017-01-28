@@ -95,7 +95,6 @@
 <script>
 export default {
   created () {
-    // TODO this is run everytime we go to home page??
     Promise.all([
       this.$store.dispatch('FETCH_EXERCISES'),
       this.$store.dispatch('FETCH_WORKOUTS')

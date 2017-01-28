@@ -15,9 +15,7 @@
           <strong>Error!</strong> Something went wrong. Try again!
       </div>
 
-        <div class="well">
-          <WorkoutForm @on:success="setSuccess" @on.failure="setFailure"></WorkoutForm>
-        </div>
+      <WorkoutForm @success="setSuccess" @failure="setFailure"></WorkoutForm>
       </div>
   </div>
 </div>
@@ -36,6 +34,7 @@ export default {
   },
   methods: {
     setSuccess: function () {
+      // TODO     - CLIENT: Redirect to workouts once successs
       this.success = true
     },
     setFailure: function () {

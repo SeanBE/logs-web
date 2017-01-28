@@ -1,4 +1,4 @@
-import Vue from 'vue'
+// import Vue from 'vue'
 import { isEmpty } from 'lodash'
 import * as api from '../../api/'
 import * as types from '../types'
@@ -7,8 +7,6 @@ const state = {
   workouts: [],
   workout: { /* Workout currently editing.. */ }
 }
-
-// arr.$set(index, value) which is just syntax sugar for arr.splice(index, 1, value)
 
 const getters = {
   workout: state => state.workout,
@@ -81,15 +79,16 @@ const mutations = {
   },
   [types.CHANGE_EXERCISE] (state, {index, exercise}) {
     state.workout.entries[index].exercise = exercise
-  },
-  [types.ADD_SET_TO_WORKOUT] (state, {workout, exercise}) {
-    state.workouts[state.workouts.indexOf(workout)].exercises[exercise]
-        .push({'comment': '', 'set_num': 10, 'reps': 0, 'weight': 0})
-  },
-  [types.ADD_EXERCISE_TO_WORKOUT] (state, {workout, exercise}) {
-    Vue.set(state.workouts[state.workouts.indexOf(workout)].exercises,
-      exercise, [{'comment': '', 'set_num': 0, 'reps': 0, 'weight': 0}])
   }
+
+  // [types.ADD_SET_TO_WORKOUT] (state, {workout, exercise}) {
+  //   state.workouts[state.workouts.indexOf(workout)].exercises[exercise]
+  //       .push({'comment': '', 'set_num': 10, 'reps': 0, 'weight': 0})
+  // },
+  // [types.ADD_EXERCISE_TO_WORKOUT] (state, {workout, exercise}) {
+  //   Vue.set(state.workouts[state.workouts.indexOf(workout)].exercises,
+  //     exercise, [{'comment': '', 'set_num': 0, 'reps': 0, 'weight': 0}])
+  // }
 }
 
 export default {

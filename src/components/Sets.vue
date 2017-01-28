@@ -15,7 +15,8 @@
           <tr>
             <td>Set #{{index}}</td>
             <td>{{set.reps}} Reps</td>
-            <td>{{set.weight}} kg</td>
+            <td v-if="set.bodyweight">Bodyweight</td>
+            <td v-else>{{set.weight}} kg</td>
           </tr>
         </tbody>
         <caption v-if="set.comment">{{set.comment}}</caption>
