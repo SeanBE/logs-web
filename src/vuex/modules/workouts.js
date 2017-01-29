@@ -8,7 +8,6 @@ const state = {
   workout: { /* Workout currently editing.. */ }
 }
 
-// TODO first two are simply mapmutations calls..
 const getters = {
   workout: state => state.workout,
   workouts: state => state.workouts,
@@ -44,8 +43,8 @@ const actions = {
   CHANGE_EXERCISE: ({ commit }, payload) => {
     commit(types.CHANGE_EXERCISE, payload)
   },
-  CHANGE_EXERCISES: ({ commit }, payload) => {
-    commit(types.CHANGE_EXERCISES, payload)
+  CHANGE_SET_DETAILS: ({ commit }, payload) => {
+    commit(types.CHANGE_SET_DETAILS, payload)
   },
   UPDATE_WORKOUT: ({ commit, state }) => {
     return api.updateWorkout(state.workout.id, state.workout)
@@ -72,8 +71,7 @@ const mutations = {
   [types.CHANGE_WORKOUT_DETAILS] (state, {attr, value}) {
     state.workout[attr] = value
   },
-  [types.CHANGE_EXERCISES] (state, {exercise, set, attr, value}) {
-    // TODO rename.
+  [types.CHANGE_SET_DETAILS] (state, {exercise, set, attr, value}) {
     state.workout.entries[exercise].sets[set][attr] = value
   },
   [types.CHANGE_EXERCISE] (state, {index, exercise}) {

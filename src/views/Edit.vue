@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- TODO differnce between click and submit.prevent -->
     <!-- TODO use components!!-->
     <!-- TODO redirect if successful. otherwise show error message like login -->
   <div class="row">
@@ -83,14 +82,14 @@ export default {
         exercise: this.exercises.find(obj => obj.name === value)})
     },
     updateSets: function (exIndex, setIndex, attribute, e) {
-      this.$store.dispatch('CHANGE_EXERCISES', {
+      this.$store.dispatch('CHANGE_SET_DETAILS', {
         exercise: exIndex,
         set: setIndex,
         attr: attribute,
         value: e.target.value})
     },
     updateCheck: function (exIndex, setIndex, attribute, e) {
-      this.$store.dispatch('CHANGE_EXERCISES', {
+      this.$store.dispatch('CHANGE_SET_DETAILS', {
         exercise: exIndex,
         set: setIndex,
         attr: attribute,

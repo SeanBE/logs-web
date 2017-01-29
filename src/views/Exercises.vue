@@ -22,7 +22,6 @@
         </a>
       </ul>
 
-      <!-- TODO make this recently used.. -->
       <h4>Recently Used</h4>
       <ul class="list-group well">
         <li v-for="exercise in recentlyUsed" class="list-group-item">
