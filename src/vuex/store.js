@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import auth from './modules/auth'
 import workouts from './modules/workouts'
+import messages from './modules/messages'
 import exercises from './modules/exercises'
 
 import {subscribe} from './plugins'
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     auth,
     workouts,
+    messages,
     exercises
   },
   // Only for development.

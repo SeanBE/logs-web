@@ -4,7 +4,7 @@
     <div class="col-md-12">
       <!-- TODO order by date proposed ascending -->
       <h2>Upcoming Workouts</h2>
-      <div v-if="upcoming.length > 0" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div v-if="upcoming.length > 0" class="panel-group" id="accordion" role="tablist">
         <workout v-for="(workout,index) in upcoming" :workout="workout"></workout>
       </div>
         <div v-else class="alert alert-info">
@@ -16,7 +16,7 @@
     <div class="col-md-12">
       <h2>Past Workouts</h2>
       <!-- TODO order by date completed descending -->
-      <div v-if="completed.length > 0" class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div v-if="completed.length > 0" class="panel-group" id="accordion" role="tablist">
         <workout v-for="(workout,index) in completed" :workout="workout"></workout>
       </div>
         <div v-else class="alert alert-info">

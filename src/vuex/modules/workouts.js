@@ -8,6 +8,7 @@ const state = {
   workout: { /* Workout currently editing.. */ }
 }
 
+// TODO first two are simply mapmutations calls..
 const getters = {
   workout: state => state.workout,
   workouts: state => state.workouts,
@@ -27,12 +28,11 @@ const actions = {
   // TODO catch errors for fetch_workouts fetch exercises!
   FETCH_WORKOUTS: ({ commit, state }) => {
     api.getWorkouts()
-      .then(({data}) => commit(types.SET_WORKOUTS, data))
+    .then(({data}) => commit(types.SET_WORKOUTS, data))
   },
   DELETE_WORKOUT: ({ commit }, workout) => {
     api.deleteWorkout(workout.id)
     .then(() => commit(types.REMOVE_WORKOUT, workout))
-    .catch(error => console.log(error))
   },
   ADD_WORKOUT: ({ commit }, workout) => {
     return api.addWorkout(workout)
@@ -42,7 +42,6 @@ const actions = {
     commit(types.CHANGE_WORKOUT_DETAILS, payload)
   },
   CHANGE_EXERCISE: ({ commit }, payload) => {
-    console.log(payload)
     commit(types.CHANGE_EXERCISE, payload)
   },
   CHANGE_EXERCISES: ({ commit }, payload) => {
