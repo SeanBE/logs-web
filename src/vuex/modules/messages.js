@@ -11,6 +11,10 @@ const mutations = {
   },
   [types.SET_ERROR_MESSAGE] (state, message) {
     state.errorMessage = message
+  },
+  [types.CLEAR_MESSAGES] (state) {
+    state.errorMessage = ''
+    state.successMessage = ''
   }
 }
 
