@@ -12,13 +12,10 @@ const getters = {
   isLogged: ({ token }) => !isEmpty(token)
 }
 
-// dispatch for actions async commit sync .
 const actions = {
   NEW_TOKEN: ({ dispatch }, payload) => {
     return api.newToken(payload)
-      .then(({data}) => {
-        dispatch('SET_TOKEN', data.token)
-      })
+    .then(({data}) => dispatch('SET_TOKEN', data.token))
   },
   SET_TOKEN: ({ commit }, token) => {
     commit(types.SET_TOKEN, token)
