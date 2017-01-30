@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 import Sets from './Sets.vue'
 
 export default {
@@ -41,9 +41,10 @@ export default {
     Sets
   },
   methods: {
+    ...mapMutations({ setActiveWorkout: 'SET_ACTIVE_WORKOUT' }),
     ...mapActions({deleteExercise: 'DELETE_WORKOUT'}),
     goToEdit (workout) {
-      this.$store.commit({type: 'SET_ACTIVE_WORKOUT', workout: workout})
+      this.setActiveWorkout(workout)
       this.$router.push({name: 'workout.edit', params: { id: workout.id }})
     }
   },
