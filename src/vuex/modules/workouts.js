@@ -1,4 +1,3 @@
-// import Vue from 'vue'
 import { isEmpty } from 'lodash'
 import * as api from '../../api/'
 import * as types from '../types'
@@ -9,6 +8,7 @@ const state = {
 }
 
 const getters = {
+  // TODO get rid of these two getters..
   workout: state => state.workout,
   workouts: state => state.workouts,
   upcoming: state => {
@@ -37,15 +37,6 @@ const actions = {
     return api.addWorkout(workout)
     .then(({data}) => commit(types.ADD_WORKOUT, data))
   },
-  CHANGE_WORKOUT_DETAILS: ({ commit }, payload) => {
-    commit(types.CHANGE_WORKOUT_DETAILS, payload)
-  },
-  CHANGE_EXERCISE: ({ commit }, payload) => {
-    commit(types.CHANGE_EXERCISE, payload)
-  },
-  CHANGE_SET_DETAILS: ({ commit }, payload) => {
-    commit(types.CHANGE_SET_DETAILS, payload)
-  },
   UPDATE_WORKOUT: ({ commit, state }) => {
     return api.updateWorkout(state.workout.id, state.workout)
     .then(() => commit(types.CLEAR_ACTIVE_WORKOUT))
@@ -62,30 +53,46 @@ const mutations = {
   [types.REMOVE_WORKOUT] (state, workout) {
     state.workouts.splice(state.workouts.indexOf(workout), 1)
   },
-  [types.SET_ACTIVE_WORKOUT] (state, {workout}) {
+  [types.SET_ACTIVE_WORKOUT] (state, workout) {
     state.workout = workout
+  },
+  [types.SET_NEW_WORKOUT] (state) {
+    state.workout = {
+      date_proposed: null,
+      comment: '',
+      entries: [{
+        exercise: { name: '' },
+        sets: [
+          { weight: 0, reps: 0, comment: '', bodyweight: false }
+        ]
+      }]
+    }
   },
   [types.CLEAR_ACTIVE_WORKOUT] (state) {
     state.workout = {}
   },
-  [types.CHANGE_WORKOUT_DETAILS] (state, {attr, value}) {
+  [types.CHANGE_WORKOUT_DETAILS] (state, {target: {name: attr, value}}) {
     state.workout[attr] = value
   },
-  [types.CHANGE_SET_DETAILS] (state, {exercise, set, attr, value}) {
-    state.workout.entries[exercise].sets[set][attr] = value
+  [types.CHANGE_SET_DETAILS] (state, {set, target: {name: attr, value}}) {
+    // TODO am i allowed to manipulate store items indirectly?
+    set[attr] = value
   },
-  [types.CHANGE_EXERCISE] (state, {index, exercise}) {
-    state.workout.entries[index].exercise = exercise
+  [types.CHANGE_EXERCISE] (state, {entry, exercise}) {
+    entry.exercise = exercise
+  },
+  [types.ADD_ENTRY_TO_WORKOUT] (state, workout) {
+    workout.entries.push({
+      exercise: {name: ''},
+      sets: [ {weight: 0, reps: 0, comment: '', bodyweight: false} ]
+    })
+  },
+  [types.ADD_SET_TO_ENTRY] (state, entry) {
+    entry.sets.push({weight: 0, reps: 0, comment: '', bodyweight: false})
+  },
+  [types.REMOVE_SET_FROM_ENTRY] (state, {entry, index}) {
+    entry.sets.splice(index, 1)
   }
-
-  // [types.ADD_SET_TO_WORKOUT] (state, {workout, exercise}) {
-  //   state.workouts[state.workouts.indexOf(workout)].exercises[exercise]
-  //       .push({'comment': '', 'set_num': 10, 'reps': 0, 'weight': 0})
-  // },
-  // [types.ADD_EXERCISE_TO_WORKOUT] (state, {workout, exercise}) {
-  //   Vue.set(state.workouts[state.workouts.indexOf(workout)].exercises,
-  //     exercise, [{'comment': '', 'set_num': 0, 'reps': 0, 'weight': 0}])
-  // }
 }
 
 export default {
