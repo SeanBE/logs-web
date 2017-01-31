@@ -9,7 +9,6 @@
         <button type="button" disabled class="btn">Add Exercise</button>
         <!-- @click.prevent="addExercise({workout:workout, exercise:exercise})"  -->
       </h1>
-      <form>
         <div class="form-group">
           <label for="date_proposed" class="control-label">Date Proposed:</label>
           <input class="form-control" id="date_proposed" :value="workout.date_proposed" @input="updateDetails" name="date_proposed" type="date">
