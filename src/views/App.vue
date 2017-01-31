@@ -11,6 +11,7 @@ import NavBar from '../components/NavBar.vue'
 import Messages from '../components/Messages.vue'
 
 export default {
+  name: 'App',
   components: {
     NavBar,
     Messages

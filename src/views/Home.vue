@@ -94,6 +94,7 @@
 
 <script>
 export default {
+  name: 'HomePage',
   created () {
     Promise.all([
       this.$store.dispatch('FETCH_EXERCISES'),
