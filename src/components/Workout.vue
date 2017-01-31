@@ -37,6 +37,7 @@ import { mapActions, mapMutations } from 'vuex'
 import Sets from './Sets.vue'
 
 export default {
+  // TODO move logic to view component.
   components: {
     Sets
   },

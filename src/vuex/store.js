@@ -11,8 +11,7 @@ import createLogger from 'vuex/dist/logger.js'
 
 Vue.use(Vuex)
 Vue.config.debug = true
-// const debug = process.env.NODE_ENV !== 'production'
-const debug = true
+const debug = process.env.NODE_ENV !== 'production'
 
 export default new Vuex.Store({
   modules: {
@@ -21,7 +20,6 @@ export default new Vuex.Store({
     messages,
     exercises
   },
-  // Only for development.
   strict: debug,
   plugins: debug ? [createLogger(), subscribe] : [subscribe]
 })

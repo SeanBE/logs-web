@@ -28,7 +28,7 @@
     <div class="form-group">
         <div class="btn-group" role="group">
           <button type="button" @click.prevent="addEntry(workout)" class="btn btn-secondary">Add Exercise</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary">Save Workout</button>
         </div>
     </div>
   </form>

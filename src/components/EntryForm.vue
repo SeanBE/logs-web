@@ -1,7 +1,9 @@
 <template>
 <div>
   <div class="form-group">
-    <label class="control-label">Exercise:</label>
+    <label class="control-label">Exercise:
+      <button type="button" class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash" /> Remove</button>
+    </label>
       <select :value="entry.exercise.name" @change="updateExercise(entry, $event.target.value)" class="form-control">
         <option v-for="exercise in exercises">{{exercise.name}}</option>
     </select>
@@ -13,7 +15,7 @@
   </div>
 
   <div class="form-group">
-    <button type="button" @click.prevent="addSet(entry)" class="btn btn-secondary">Add Set</button>
+    <button type="button" @click.prevent="addSet(entry)" class="center-block btn btn-secondary">Add Set</button>
   </div>
 </div>
 </template>

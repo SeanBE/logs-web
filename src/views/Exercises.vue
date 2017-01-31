@@ -43,6 +43,8 @@ import { isEmpty } from 'lodash'
 import { mapGetters, mapState } from 'vuex'
 
 export default {
+  // TODO add searchQuery and filtered to vuex.
+  // TODO create components for exercise.
   name: 'ExercisesPage',
   data () {
     return {

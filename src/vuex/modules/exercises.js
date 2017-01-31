@@ -13,7 +13,6 @@ const actions = {
   FETCH_EXERCISES: ({ commit, state }) => {
     return api.getExercises()
       .then(({ data }) => commit(types.SET_EXERCISES, data))
-      .catch(error => console.error('Error get exercises api:', error))
   },
   ADD_EXERCISE: ({ commit }, data) => {
     return api.addExercise(data)

@@ -21,7 +21,6 @@ const getters = {
 }
 
 const actions = {
-  // TODO catch errors for fetch_workouts fetch exercises!
   FETCH_WORKOUTS: ({ commit, state }) => {
     api.getWorkouts()
     .then(({data}) => commit(types.SET_WORKOUTS, data))
@@ -35,7 +34,6 @@ const actions = {
     .then(({data}) => commit(types.ADD_WORKOUT, data))
   },
   UPDATE_WORKOUT: ({ commit, state }) => {
-    // TODO do we need to add it back to state?
     return api.updateWorkout(state.workout.id, state.workout)
   }
 }
@@ -69,7 +67,6 @@ const mutations = {
     state.workout[attr] = value
   },
   [types.CHANGE_SET_DETAILS] (state, {set, target: {name: attr, value}}) {
-    // TODO am I allowed to manipulate store items indirectly?
     set[attr] = value
   },
   [types.CHANGE_EXERCISE] (state, {entry, exercise}) {
