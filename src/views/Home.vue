@@ -93,13 +93,20 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   name: 'HomePage',
   created () {
     Promise.all([
       this.$store.dispatch('FETCH_EXERCISES'),
       this.$store.dispatch('FETCH_WORKOUTS')
-    ])
+    ]).catch(() => this.setErrorMessage('Something went wrong on our side...'))
+  },
+  methods: {
+    ...mapMutations({
+      setErrorMessage: 'SET_ERROR_MESSAGE'
+    })
   }
 }
 </script>

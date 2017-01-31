@@ -47,7 +47,7 @@ export default {
         exercise: this.exercises.find(obj => obj.name === value)})
     },
     onSubmit: function () {
-      this.$store.dispatch('ADD_WORKOUT', this.workout)
+      this.$store.dispatch('ADD_WORKOUT')
         .then(response => {
           this.setSuccessMessage('Workout successfully saved.')
           this.$router.push({ name: 'workouts' })

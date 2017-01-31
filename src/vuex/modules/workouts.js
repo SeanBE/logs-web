@@ -8,9 +8,6 @@ const state = {
 }
 
 const getters = {
-  // TODO get rid of these two getters..
-  workout: state => state.workout,
-  workouts: state => state.workouts,
   upcoming: state => {
     return state.workouts.filter(function (workout) {
       return isEmpty(workout.date_completed)
@@ -33,17 +30,13 @@ const actions = {
     api.deleteWorkout(workout.id)
     .then(() => commit(types.REMOVE_WORKOUT, workout))
   },
-  ADD_WORKOUT: ({ commit }, workout) => {
-    // TODO do we need workout param or can we just use store object.
-    // TODO do we need to clear active workout..
-    return api.addWorkout(workout)
+  ADD_WORKOUT: ({ commit }) => {
+    return api.addWorkout(state.workout)
     .then(({data}) => commit(types.ADD_WORKOUT, data))
   },
   UPDATE_WORKOUT: ({ commit, state }) => {
     // TODO do we need to add it back to state?
-    // TODO do we need to clear active workout..
     return api.updateWorkout(state.workout.id, state.workout)
-    .then(() => commit(types.CLEAR_ACTIVE_WORKOUT))
   }
 }
 
@@ -72,14 +65,11 @@ const mutations = {
       }]
     }
   },
-  [types.CLEAR_ACTIVE_WORKOUT] (state) {
-    state.workout = {}
-  },
   [types.CHANGE_WORKOUT_DETAILS] (state, {target: {name: attr, value}}) {
     state.workout[attr] = value
   },
   [types.CHANGE_SET_DETAILS] (state, {set, target: {name: attr, value}}) {
-    // TODO am i allowed to manipulate store items indirectly?
+    // TODO am I allowed to manipulate store items indirectly?
     set[attr] = value
   },
   [types.CHANGE_EXERCISE] (state, {entry, exercise}) {
