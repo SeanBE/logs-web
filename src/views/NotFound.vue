@@ -1,5 +1,5 @@
 <template>
-<div class="well error-container">
+<div class="well" style="text-align:center">
       <h2>Oops! 404 Not Found</h2>
       <div>
         <router-link :to="{ name: 'dashboard' }">
@@ -11,8 +11,8 @@
 </div>
 </template>
 
-<style>
-.error-container {
-  text-align: center
+<script>
+export default {
+  name: 'NotFoundPage'
 }
-</style>
+</script>

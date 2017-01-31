@@ -25,6 +25,7 @@
 import { mapActions, mapMutations } from 'vuex'
 
 export default {
+  name: 'LoginPage',
   data () {
     return {
       username: '',

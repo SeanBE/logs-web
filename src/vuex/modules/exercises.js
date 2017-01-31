@@ -6,7 +6,6 @@ const state = {
 }
 
 const getters = {
-  exercises: state => state.exercises,
   recentlyUsed: state => state.exercises
 }
 

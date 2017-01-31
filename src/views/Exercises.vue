@@ -40,12 +40,11 @@
 
 <script>
 import { isEmpty } from 'lodash'
-import {
-  mapGetters
-} from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
-  data: function () {
+  name: 'ExercisesPage',
+  data () {
     return {
       searchQuery: '',
       showCreate: false
@@ -60,7 +59,10 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['recentlyUsed', 'exercises']),
+    ...mapState({
+      exercises: state => state.exercises.exercises
+    }),
+    ...mapGetters(['recentlyUsed']),
     filtered: function () {
       if (!this.searchQuery) {
         return []

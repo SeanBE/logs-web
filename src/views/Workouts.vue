@@ -32,6 +32,7 @@ import { mapGetters } from 'vuex'
 import Workout from '../components/Workout.vue'
 
 export default {
+  name: 'WorkoutsPage',
   components: {
     Workout
   },
