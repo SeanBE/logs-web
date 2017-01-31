@@ -1,104 +1,58 @@
 <template>
-  <div>
-    <!-- TODO use components!!-->
-    <!-- TODO redirect if successful. otherwise show error message like login -->
   <div class="row">
     <div class="col-md-12">
-      <h1>Edit Workout
-        <button type="button" @click.prevent="updateWorkout" class="btn btn-primary">Update</button>
-        <button type="button" disabled class="btn">Add Exercise</button>
-        <!-- @click.prevent="addExercise({workout:workout, exercise:exercise})"  -->
-      </h1>
-        <div class="form-group">
-          <label for="date_proposed" class="control-label">Date Proposed:</label>
-          <input class="form-control" id="date_proposed" :value="workout.date_proposed" @input="updateDetails" name="date_proposed" type="date">
-        </div>
-        <div class="form-group">
-          <label for="date_completed" class="control-label">Date Completed:</label>
-          <input class="form-control" id="date_completed" :value="workout.date_completed" @input="updateDetails" name="date_completed" type="date">
-        </div>
-        <div class="form-group">
-          <label for="workout_comment" class="control-label">Workout Comments:</label>
-          <textarea class="form-control" id="workout_comment" :value="workout.comment" @input="updateDetails" name="comment" type="text"></textarea>
-        </div>
-      </div>
-</div>
-<div v-for="(entry,exIndex) in workout.entries" class="row">
-  <div class="col-md-12">
-    <div class="form-group">
-      <label class="control-label">Exercise:</label>
 
-      <select :value="entry.exercise.name" @change="updateExercise(exIndex, $event.target.value)" class="form-control">
-          <option v-for="exercise in exercises">{{exercise.name}}</option>
-      </select>
-    </div>
-    <div class="form-group">
-      <!-- @click.prevent="addSet({workout:workout, exercise:exercise})"  -->
-      <button type="button" disabled class="btn">Add Set</button>
-    </div>
-    <div v-for="(set,sIndex) in entry.sets" class="well form-group">
-
-      <div class="form-group">
-      <label class="control-label">Reps:</label>
-      <input type="number" :value="set.reps"
-          @input="updateSets(exIndex, sIndex, 'reps', $event)" class="form-control" />
-      </div>
-
-      <label class="control-label">Weight:</label>
-      <input :disabled="set.bodyweight" type="number" :value.number="set.weight"
-          @input="updateSets(exIndex, sIndex, 'weight', $event)" class="form-control" />
-
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" @change="updateCheck(exIndex, sIndex, 'bodyweight', $event)" :checked="set.bodyweight">
-          Bodyweight
-        </label>
-      </div>
-
-      <label class="control-label">Comment:</label>
-      <textarea class="form-control" :value="set.comment"
-          @input="updateSets(exIndex, sIndex, 'comment', $event)" type="text">
+      <WorkoutForm
+        :editing="true"
+        :workout="workout"
+        :exercises="exercises"
+        :updateDetails="updateDetails"
+        :onSubmit="onSubmit"
+        :addSet="addSet"
+        :updateExercise="updateExercise"
+        :updateSet="updateSet"
+        :removeSet="removeSet"
+        :addEntry="addEntry" />
 
     </div>
-</div>
-</div>
-</div>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapMutations, mapState } from 'vuex'
+import WorkoutForm from '../components/WorkoutForm.vue'
+
 export default {
-  computed: {
-    ...mapGetters(['workout', 'exercises'])
-  },
+  name: 'EditPage',
+  components: { WorkoutForm },
+  computed: mapState({
+    exercises: state => state.exercises.exercises,
+    workout: state => state.workouts.workout
+  }),
   methods: {
-    updateDetails: function (e) {
-      this.$store.dispatch('CHANGE_WORKOUT_DETAILS', {attr: e.target.name, value: e.target.value})
-    },
-    updateExercise: function (exIndex, value) {
-      this.$store.dispatch('CHANGE_EXERCISE', {
-        index: exIndex,
+    ...mapMutations({
+      setSuccessMessage: 'SET_SUCCESS_MESSAGE',
+      setErrorMessage: 'SET_ERROR_MESSAGE',
+      updateDetails: 'CHANGE_WORKOUT_DETAILS',
+      addEntry: 'ADD_ENTRY_TO_WORKOUT',
+      addSet: 'ADD_SET_TO_ENTRY',
+      updateSet: 'CHANGE_SET_DETAILS',
+      removeSet: 'REMOVE_SET_FROM_ENTRY'
+    }),
+    updateExercise: function (entry, value) {
+      this.$store.commit('CHANGE_EXERCISE', {
+        entry,
         exercise: this.exercises.find(obj => obj.name === value)})
     },
-    updateSets: function (exIndex, setIndex, attribute, e) {
-      this.$store.dispatch('CHANGE_SET_DETAILS', {
-        exercise: exIndex,
-        set: setIndex,
-        attr: attribute,
-        value: e.target.value})
-    },
-    updateCheck: function (exIndex, setIndex, attribute, e) {
-      this.$store.dispatch('CHANGE_SET_DETAILS', {
-        exercise: exIndex,
-        set: setIndex,
-        attr: attribute,
-        value: e.target.checked})
-    },
-    updateWorkout () {
-      // TODO Validation.
+    onSubmit: function () {
       this.$store.dispatch('UPDATE_WORKOUT')
+        .then(response => {
+          this.setSuccessMessage('Workout successfully updated.')
+          this.$router.push({ name: 'workouts' })
+        }).catch(error => {
+          this.setErrorMessage(error)
+        })
     }
   }
 }
-
 </script>

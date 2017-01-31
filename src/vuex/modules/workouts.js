@@ -34,10 +34,14 @@ const actions = {
     .then(() => commit(types.REMOVE_WORKOUT, workout))
   },
   ADD_WORKOUT: ({ commit }, workout) => {
+    // TODO do we need workout param or can we just use store object.
+    // TODO do we need to clear active workout..
     return api.addWorkout(workout)
     .then(({data}) => commit(types.ADD_WORKOUT, data))
   },
   UPDATE_WORKOUT: ({ commit, state }) => {
+    // TODO do we need to add it back to state?
+    // TODO do we need to clear active workout..
     return api.updateWorkout(state.workout.id, state.workout)
     .then(() => commit(types.CLEAR_ACTIVE_WORKOUT))
   }
