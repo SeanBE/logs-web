@@ -6,7 +6,7 @@
       <input type="date" name="date_proposed" class="form-control" :value="workout.date_proposed" @input="updateDetails">
     </div>
 
-    <div v-if="editing" class="form-group">
+    <div v-if="isEditing" class="form-group">
       <label class="control-label">Date Completed:</label>
       <input type="date" name="date_completed" class="form-control" :value="workout.date_completed" @input="updateDetails">
     </div>
@@ -16,14 +16,7 @@
       <textarea type="text" name="comment" class="form-control" :value="workout.comment" @input="updateDetails" />
     </div>
 
-    <entryForm
-      v-for="entry in workout.entries"
-      :entry="entry"
-      :addSet="addSet"
-      :updateSet="updateSet"
-      :updateExercise="updateExercise"
-      :removeSet="removeSet"
-      :exercises="exercises" />
+    <entryForm v-for="entry in workout.entries" :entry="entry" />
 
     <div class="form-group">
         <div class="btn-group" role="group">
@@ -35,9 +28,17 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import EntryForm from './EntryForm.vue'
+
 export default {
   components: { EntryForm },
-  props: ['editing', 'onSubmit', 'workout', 'exercises', 'updateDetails', 'updateSet', 'addEntry', 'addSet', 'updateExercise', 'removeSet']
+  props: ['workout', 'onSubmit', 'isEditing'],
+  methods: {
+    ...mapMutations({
+      addEntry: 'ADD_ENTRY_TO_WORKOUT',
+      updateDetails: 'CHANGE_WORKOUT_DETAILS'
+    })
+  }
 }
 </script>

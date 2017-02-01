@@ -1,51 +1,31 @@
 <template>
   <div class="row">
     <div class="col-md-12">
-
-      <WorkoutForm
-        :editing="true"
-        :workout="workout"
-        :exercises="exercises"
-        :updateDetails="updateDetails"
-        :onSubmit="onSubmit"
-        :addSet="addSet"
-        :updateExercise="updateExercise"
-        :updateSet="updateSet"
-        :removeSet="removeSet"
-        :addEntry="addEntry" />
-
+      <WorkoutForm :editing="true" :workout="workout" :onSubmit="onSubmit" />
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapState } from 'vuex'
+import { mapMutations, mapState, mapActions } from 'vuex'
 import WorkoutForm from '../components/WorkoutForm.vue'
 
 export default {
   name: 'EditPage',
   components: { WorkoutForm },
   computed: mapState({
-    exercises: state => state.exercises.exercises,
     workout: state => state.workouts.workout
   }),
   methods: {
+    ...mapActions({
+      updateWorkout: 'UPDATE_WORKOUT'
+    }),
     ...mapMutations({
       setSuccessMessage: 'SET_SUCCESS_MESSAGE',
-      setErrorMessage: 'SET_ERROR_MESSAGE',
-      updateDetails: 'CHANGE_WORKOUT_DETAILS',
-      addEntry: 'ADD_ENTRY_TO_WORKOUT',
-      addSet: 'ADD_SET_TO_ENTRY',
-      updateSet: 'CHANGE_SET_DETAILS',
-      removeSet: 'REMOVE_SET_FROM_ENTRY'
+      setErrorMessage: 'SET_ERROR_MESSAGE'
     }),
-    updateExercise: function (entry, value) {
-      this.$store.commit('CHANGE_EXERCISE', {
-        entry,
-        exercise: this.exercises.find(obj => obj.name === value)})
-    },
     onSubmit: function () {
-      this.$store.dispatch('UPDATE_WORKOUT')
+      this.updateWorkout()
         .then(response => {
           this.setSuccessMessage('Workout successfully updated.')
           this.$router.push({ name: 'workouts' })

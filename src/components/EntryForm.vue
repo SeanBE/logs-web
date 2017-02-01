@@ -11,19 +11,35 @@
 
   <div v-for="(set, index) in entry.sets" class="well">
     <button type="button" data-dismiss="alert" @click.prevent="removeSet({entry, index})" class="close"><span>&times;</span></button>
-    <SetForm :set="set" :updateSet="updateSet" />
+    <SetForm :set="set" />
   </div>
 
   <div class="form-group">
     <button type="button" @click.prevent="addSet(entry)" class="center-block btn btn-secondary">Add Set</button>
   </div>
+
 </div>
 </template>
 
 <script>
+import { mapMutations, mapState } from 'vuex'
 import SetForm from './SetForm.vue'
 export default {
   components: { SetForm },
-  props: ['entry', 'exercises', 'addSet', 'updateExercise', 'updateSet', 'removeSet']
+  props: ['entry'],
+  computed: mapState({
+    exercises: state => state.exercises.exercises
+  }),
+  methods: {
+    ...mapMutations({
+      addSet: 'ADD_SET_TO_ENTRY',
+      removeSet: 'REMOVE_SET_FROM_ENTRY'
+    }),
+    updateExercise: function (entry, value) {
+      this.$store.commit('CHANGE_EXERCISE', {
+        entry,
+        exercise: this.exercises.find(obj => obj.name === value)})
+    }
+  }
 }
 </script>

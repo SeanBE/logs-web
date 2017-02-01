@@ -29,7 +29,14 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
-  props: ['set', 'updateSet']
+  props: ['set'],
+  methods: {
+    ...mapMutations({
+      updateSet: 'CHANGE_SET_DETAILS'
+    })
+  }
 }
 </script>
