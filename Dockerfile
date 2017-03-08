@@ -1,5 +1,5 @@
 FROM nginx:alpine
-MAINTAINER Sean Löfgren "lofgren.sean@gmail.com"
+MAINTAINER Sean Löfgren "SeanBE@users.noreply.github.com"
 
 RUN apk update
 RUN apk add nodejs

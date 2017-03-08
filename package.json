@@ -2,7 +2,7 @@
   "name": "view",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "seanBE <lofgren.sean@gmail.com>",
+  "author": "seanBE <SeanBE@users.noreply.github.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
