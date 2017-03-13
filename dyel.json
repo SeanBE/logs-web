@@ -1,0 +1,8 @@
+{
+  "name": "Problem",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "dyel.js",
+  }
+}
+
